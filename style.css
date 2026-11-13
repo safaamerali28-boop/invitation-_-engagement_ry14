@@ -1,0 +1,727 @@
+@import url('https://fonts.googleapis.com/css2?family=Mada:wght@400;600&family=El+Messiri:wght@700&family=Almarai:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Markazi+Text:wght@400;600&family=Noto+Naskh+Arabic:wght@400;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Reem+Kufi:wght@400;700&family=Cairo:wght@400;600;700&family=Tajawal:wght@400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    background-color: #ACB090;
+    color: #3a3833;
+    font-family: 'Markazi Text', serif;
+    direction: rtl;
+}
+
+html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+/* ==========================================
+   ⏳ شاشة التحميل الأولية (Preloader)
+   ========================================== */
+#loader-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ACB090;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease;
+}
+
+.loader-text {
+    font-family: 'Aref Ruqaa', serif;
+    color: #f0c9c0;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.loader-bar-container {
+    width: 220px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.loader-bar {
+    width: 0%;
+    height: 100%;
+    background-color: #f0c9c0;
+    border-radius: 10px;
+    transition: width 0.2s ease;
+}
+
+/* ==========================================
+   🌟 شاشة البداية
+   ========================================== */
+
+#start-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('page8.png');
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+}
+
+#start-screen.ready {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.tap-hint {
+    position: absolute;
+    bottom: 35px;
+    font-family: 'Markazi Text', serif;
+    color: #ffffff;
+    font-size: 1.3rem;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+    animation: pulseHint 2s infinite ease-in-out;
+}
+
+.logo-wrapper {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-part {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    opacity: 0;
+    animation: logoFadeIn 1.5s ease-out forwards 0.2s;
+    transition: transform 1.5s ease, opacity 1.2s ease;
+}
+
+.logo-left {
+    clip-path: inset(0 50% 0 0);
+}
+
+.logo-right {
+    clip-path: inset(0 0 0 50%);
+}
+
+#start-screen.animate-open .logo-left {
+    transform: scale(2) translateX(-80px) rotate(-5deg);
+    opacity: 0;
+}
+
+#start-screen.animate-open .logo-right {
+    transform: scale(2) translateX(80px) rotate(5deg);
+    opacity: 0;
+}
+
+#start-screen.animate-open {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease 0.5s;
+}
+
+@keyframes logoFadeIn {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulseHint {
+    0%, 100% { opacity: 0.6; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(-4px); }
+}
+
+/* ==========================================
+   ✨ تنسيق الصفحات
+   ========================================== */
+
+.page {
+    width: 100vw;
+    height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}
+
+.page1 { background-image: url('backruonde.png'); }
+.page2 { background-image: url('page2.png'); }
+.page3 { background-image: url('page3.png'); }
+.page4 { background-image: url('page4.png'); }
+.page5 { background-image: url('page5.png'); }
+.page6 { background-image: url('page6.png'); }
+.page7 { background-image: url('page7.png'); }
+.page8 { background-image: url('page8.png'); }
+
+.page > * {
+    position: relative;
+    z-index: 2;
+}
+
+.page:not(.page1) > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out 0.3s, transform 0.8s ease-out 0.3s;
+}
+
+.page:not(.page1).active > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================
+   الصفحة الأولى
+   ========================================== */
+
+.border-frame {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(92vw, 800px) !important; /* تكبير عرض الإطار ليحتوي الكلام براحة */
+    height: auto !important;
+    object-fit: contain;
+    opacity: 0;
+    z-index: 1;
+    filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.35));
+    transition: opacity 0.9s ease-out 0.1s, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+}
+
+.page1.active .border-frame {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.page1-content-box {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: min(78vw, 360px); /* ضبط مساحة النص لتكون متسقة تماماً داخل الإطار الجديد */
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.9s ease-out 0.5s;
+}
+
+.page1.active .page1-content-box {
+    opacity: 1;
+}
+
+.page1 .kufi-text {
+    font-family: 'Aref Ruqaa', serif !important;
+    font-weight: 400 !important;
+    font-size: clamp(1.2rem, 4.2vw, 1.6rem) !important; /* تصغير حجم البسملة قليلاً لتناسب الإطار */
+    color: #485c44 !important;
+    margin-bottom: 0.6rem;
+}
+
+.page1 .kufi-verse {
+    font-family: 'Aref Ruqaa', serif !important;
+    font-weight: 400 !important;
+    font-size: clamp(1.05rem, 3.8vw, 1.45rem) !important; /* ضبط حجم الآية لتستقر بداخل الإطار تماماً */
+    line-height: 1.6;
+    color: #485c44 !important;
+}
+
+/* ==========================================
+   الصفحة الثانية
+   ========================================== */
+
+.page2 .fade-logo.match-start-logo {
+    width: 80vw !important;
+    max-height: 85vh !important;
+    object-fit: contain;
+    margin: 0 auto 1.5rem auto !important;
+    opacity: 0;
+    transform: scale(0.85);
+    transition: all 1s ease;
+}
+
+.page2.active .fade-logo {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.page2 h2.date-text.page2-pink-date {
+    font-family: 'Aref Ruqaa', serif !important;
+    font-size: 1.9rem !important;
+    color: #f0c9c0 !important;
+    position: absolute;
+    bottom: 22vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    z-index: 5;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* ==========================================
+   الصفحة الثالثة والرابعة
+   ========================================== */
+
+.card-text-container.massive-frame {
+    position: relative;
+    width: 95vw;
+    max-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.card-text-bg {
+    width: 100%;
+    max-height: 150vh;
+    object-fit: contain;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.page3.active .card-text-bg,
+.page4.active .card-text-bg {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.card-text-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 78%;
+    max-height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.8s ease 0.4s;
+}
+
+.page3.active .card-text-content,
+.page4.active .card-text-content {
+    opacity: 1;
+}
+
+.page3 .card-text-content {
+    padding-top: 15px;
+}
+
+.page3 .welcome-text {
+    font-family: 'Aref Ruqaa', serif !important;
+    font-size: 1.25rem !important;
+    color: #3d2f2d;
+    margin-bottom: 0.3rem !important;
+}
+
+.page3 .honor-text {
+    font-family: 'Aref Ruqaa', serif !important;
+    font-size: 1.4rem !important;
+    color: #2c1e1c !important;
+    margin-bottom: 0.2rem;
+}
+
+.page3 .family-name {
+    font-family: 'Aref Ruqaa', serif !important;
+    font-size: 1.5rem !important;
+    color: #2c1e1c !important;
+    margin: 0.2rem 0 !important;
+    line-height: 1.3;
+    width: 100%;
+}
+
+.page3 .family-conjunction {
+    font-family: 'Aref Ruqaa', serif !important;
+    font-size: 1.3rem !important;
+    color: #5c4744 !important;
+    margin: 0.1rem 0;
+}
+
+/* ==========================================
+   الصفحة الرابعة
+   ========================================== */
+
+.page4 .invitation-main-text {
+    font-family: 'Aref Ruqaa', serif !important;
+    font-size: 1.9rem !important;
+    color: #f0c9c0 !important;
+    margin-bottom: 0.4rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+.page4 .couple-name {
+    font-family: 'Amiri', serif !important;
+    font-size: 2.4rem !important;
+    color: #f0c9c0 !important;
+    line-height: 1.4;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+.page4 .blessing-verse {
+    font-family: 'Aref Ruqaa', serif !important;
+    font-size: 1.35rem !important;
+    color: #f0c9c0 !important;
+    margin-top: 0.4rem;
+    line-height: 1.3;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+/* ==========================================
+   الصفحة الخامسة
+   ========================================== */
+
+/* ==========================================
+   الصفحة الخامسة (تكبير وتوسط المواعيد وعبارة بمشيئة الله والملاحظة)
+   ========================================== */
+
+.page5 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    padding: 4vh 15px;
+}
+
+/* تكبير عبارة بمشيئة الله وجعلها متوسطة بالحجم في المنتصف */
+.page5 .god-will-text {
+    font-family: 'Aref Ruqaa', serif !important;
+    font-size: clamp(2rem, 6.5vw, 2.6rem) !important;
+    color: #f0c9c0 !important;
+    margin-bottom: 0.4rem;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    text-align: center;
+}
+
+.timeline-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.1rem;
+    width: 100%;
+    max-width: 380px;
+    padding-right: 15px;
+}
+
+.timeline-line {
+    position: absolute;
+    right: 39px;
+    top: 20px;
+    bottom: 20px;
+    width: 2px;
+    background-color: #f0c9c0;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 1.2s ease-in-out 0.3s;
+}
+
+.page5.active .timeline-line {
+    transform: scaleY(1);
+}
+
+.timeline-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.6s ease;
+    width: 100%;
+    text-align: right;
+}
+
+.icon-box {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 50%;
+    border: 1.5px solid #3d2f2d;
+    background-color: #f7f4ee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #3d2f2d;
+}
+
+.timeline-title {
+    font-family: 'Aref Ruqaa', serif !important;
+    font-size: clamp(1.5rem, 4.8vw, 1.8rem) !important;
+    color: #3d2f2d !important;
+}
+
+.time-date-num {
+    font-family: 'Noto Naskh Arabic', serif !important;
+    font-size: clamp(1.25rem, 4vw, 1.5rem) !important;
+    color: #f0c9c0 !important;
+}
+
+.page5.active .timeline-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.map-link-btn {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 5px 16px;
+    background-color: #f0c9c0;
+    color: #3d2f2d;
+    text-decoration: none;
+    border-radius: 18px;
+    font-size: 1.1rem;
+    font-family: 'Markazi Text', serif !important;
+    font-weight: 700;
+}
+
+/* صندوق الملاحظة بحجم متوسط وبنفس ستايل وثيم منع التصوير والأطفال ومتوسط في الشاشة */
+.page5 .event-note-box {
+    position: relative;
+    z-index: 5;
+    background: rgba(255, 230, 238, 0.88) !important;
+    border: 2px dashed #3d2f2d;
+    padding: 14px 20px;
+    border-radius: 18px;
+    max-width: 420px;
+    width: 95%;
+    text-align: center;
+    margin-top: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.page5 .event-note-box h2 {
+    font-family: 'Mada', sans-serif !important;
+    font-size: clamp(1.1rem, 3.8vw, 1.3rem) !important;
+    color: #993352 !important;
+    line-height: 1.5;
+    font-weight: 700;
+}
+/* ==========================================
+   الصفحة السادسة (تأكيد الحضور - شفاف ونظيف تماماً)
+   ========================================== */
+
+.page6 .card-text-container.massive-frame {
+    position: relative;
+    width: 94vw;
+    max-height: 85vh;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    padding: 15px 12px;
+}
+
+.page6 .card-text-bg {
+    display: none !important;
+}
+
+.page6 .rsvp-inner-content {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    text-align: center;
+}
+
+.page6 .rsvp-title {
+    font-family: 'Aref Ruqaa', serif !important;
+    font-size: 1.7rem !important;
+    color: #2c1e1c !important;
+    margin-bottom: 8px;
+}
+
+.page6 .rsvp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    text-align: right;
+}
+
+.page6 .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.page6 .form-group > label {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 1rem;
+    color: #2c1e1c !important;
+    font-weight: 700;
+}
+
+.page6 .form-group input[type="text"],
+.page6 .form-group textarea {
+    width: 100%;
+    padding: 7px 10px;
+    border: 1px solid rgba(44, 30, 28, 0.35);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.35) !important;
+    color: #2c1e1c !important;
+    font-family: 'Mada', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.page6 .form-group textarea {
+    min-height: 48px;
+    resize: vertical;
+}
+
+.page6 .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.page6 .checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Mada', sans-serif;
+    font-size: 0.9rem;
+    color: #2c1e1c !important;
+    cursor: pointer;
+}
+
+.page6 .rsvp-submit-btn {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid rgba(44, 30, 28, 0.4);
+    border-radius: 12px;
+    background: rgba(92, 71, 68, 0.85);
+    color: white;
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 1.15rem;
+    cursor: pointer;
+}
+
+/* ==========================================
+   الصفحة السابعة والثامنة
+   ========================================== */
+
+.page7 .page6-title {
+    font-family: 'El Messiri', sans-serif !important;
+    font-size: 1.7rem !important;
+    color: #f0c9c0 !important;
+    margin: 0.3rem 0;
+}
+
+.prohibition-box-highlight.light-pink-box-style {
+    background: rgba(255, 230, 238, 0.85);
+    border: 2px dashed #3d2f2d;
+    padding: 12px 18px;
+    border-radius: 15px;
+    margin-top: 10px;
+    width: 90%;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page6-warning {
+    font-family: 'Mada', sans-serif !important;
+    font-size: 1.15rem !important;
+    color: #993352 !important;
+    text-align: center;
+}
+
+.final-centered-logo-wrapper {
+    width: 75vw;
+    max-height: 65vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.final-centered-logo-wrapper img {
+    width: 100%;
+    max-height: 65vh;
+    object-fit: contain;
+}
+
+/* تصميم نص وتلميح التمرير والسهم */
+.tap-hint {
+    position: absolute;
+    bottom: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Cairo', sans-serif;
+    color: #ffffff;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+    animation: pulseHint 2s infinite ease-in-out;
+}
+
+/* شكل السهم المتحرك */
+.scroll-arrow {
+    width: 22px;
+    height: 22px;
+    border-right: 2.5px solid #ffffff;
+    border-bottom: 2.5px solid #ffffff;
+    transform: rotate(45deg);
+    animation: bounceArrow 2s infinite ease-in-out;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+@keyframes pulseHint {
+    0%, 100% { opacity: 0.7; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(-3px); }
+}
+
+@keyframes bounceArrow {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
+    40% { transform: translateY(8px) rotate(45deg); }
+    60% { transform: translateY(4px) rotate(45deg); }
+}

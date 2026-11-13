@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>دعوة خطوبة وعقد قران</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Mada:wght@400;600&family=El+Messiri:wght@700&family=Almarai:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Markazi+Text:wght@400;600&family=Noto+Naskh+Arabic:wght@400;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Reem+Kufi:wght@400;700&family=Cairo:wght@400;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- شاشة التحميل التلقائي لمنع ظهور أي شيء قبل اكتمال الصور -->
+    <div id="loader-screen">
+        <div class="loader-text">جاري تحميل الدعوة...</div>
+        <div class="loader-bar-container">
+            <div id="loader-bar" class="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- شاشة البداية -->
+    <div id="start-screen">
+        <div class="logo-wrapper">
+            <img src="loge.png" alt="Logo" class="logo-part logo-left">
+            <img src="loge.png" alt="Logo" class="logo-part logo-right">
+        </div>
+        <p class="tap-hint">اضغط لفتح الدعوة</p>
+    </div>
+
+    <!-- الصوت -->
+    <audio id="bg-audio" loop preload="auto">
+        <source src="sonde.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- الصفحة الأولى -->
+    <div class="page page1">
+        <img src="card2.png" alt="Border Frame" class="border-frame">
+        <div class="page1-content-box">
+            <h2 class="kufi-text">بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ</h2>
+            <h1 class="kufi-verse">
+                ﴿وَمِنْ آَيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَوَدَّةً وَرَحْمَةً ﴾
+            </h1>
+        </div>
+        <div class="tap-hint">
+    <span>اضغط للفتح أو مرر للأسفل</span>
+    <div class="scroll-arrow"></div>
+</div>
+    </div>
+
+    <!-- الصفحة الثانية -->
+    <div class="page page2">
+        <img src="page(2)_logo.png" alt="Logo" class="fade-logo match-start-logo">
+        <h2 class="date-text page2-pink-date">
+            ١٤ تـشـريـن الـثـانـي ٢٠٢٦
+        </h2>
+    </div>
+
+    <!-- الصفحة الثالثة -->
+    <div class="page page3">
+        <div class="card-text-container massive-frame">
+            <img src="carde text.png" alt="Card Text Background" class="card-text-bg">
+            <div class="card-text-content">
+                <h2 class="welcome-text">بكل حب وود</h2>
+                <h2 class="honor-text">تتشرف</h2>
+                <h1 class="royal-names family-name">عـائـلـة الـسـَيـد / فـوزي عـلـي الـمـعـمـوري</h1>
+                <h2 class="family-conjunction">و</h2>
+                <h1 class="royal-names family-name">عـائـلـة الـسـَيـد / عـامـر عـلـي الـمـعـمـوري</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- الصفحة الرابعة -->
+    <div class="page page4">
+        <div class="card-text-container massive-frame">
+            <div class="card-text-content">
+                <h2 class="invitation-main-text">بـدعوتكم لـحضور عـقـد قـرآن أبـنـائـهـم</h2>
+                <h1 class="royal-names couple-name">يـوسف & رُسُـل</h1>
+                <h2 class="blessing-verse">بَارَكَ اللهُ لَهُمَا وَبَارَكَ عَلَيْهُمَا وَجَمَعَ بَيْنَهُمَا فِي خَيْرٍ</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- الصفحة الخامسة: المواعيد -->
+    <div class="page page5">
+        <h1 class="god-will-text">وذلـك بمشـيئة اللّٰه تـعالـى</h1>
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+            <div class="timeline-item">
+                <div class="icon-box"><i class="fa-regular fa-calendar-days"></i></div>
+                <div class="text-box">
+                    <h2 class="timeline-title">يـوم الـسـبـت</h2>
+                    <h3 class="timeline-sub time-date-num">2026 . 11 . 14</h3>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="icon-box"><i class="fa-regular fa-clock"></i></div>
+                <div class="text-box">
+                    <h2 class="timeline-title">الـسـاعـة</h2>
+                    <h3 class="timeline-sub time-date-num">30 :4 م</h3>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="icon-box"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="text-box">
+                    <h2 class="timeline-title">ڨيـلا رؤيـة دجـلـة</h2>
+                    <a href="https://maps.app.goo.gl/KurPBVFTHbgEZdny6?g_st=atm" class="map-link-btn" target="_blank" rel="noopener noreferrer">اضغط للحصول على الموقع</a>
+                </div>
+            </div>
+        </div>
+        <div class="event-note-box">
+            <h2>ملاحظة : التجمع في منزل الـسـَيـد فوزي عند الساعة 2:30 ظهراً والإنطلاق عند الساعة 3:00 ظهراً</h2>
+        </div>
+    </div>
+
+    <!-- الصفحة السادسة: تأكيد الحضور -->
+    <div class="page page6">
+        <div class="card-text-container massive-frame">
+            <div class="rsvp-inner-content">
+                <h2 class="rsvp-title">ذكرى</h2>
+                <form class="rsvp-form" action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="c40a02ff-c512-4797-a5a1-0edf53176391">
+                    <div class="form-group">
+                        <label>الاسم الكريم</label>
+                        <input type="text" name="name" placeholder="اكتب اسمك هنا..." required>
+                    </div>
+                    <div class="form-group">
+                        <label>هل ستتمكن من الحضور؟</label>
+                        <div class="checkbox-group">
+                            <label><input type="radio" name="attendance" value="نعم" required> نعم</label>
+                            <label><input type="radio" name="attendance" value="أعتذر"> أعتذر عن الحضور</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>رسالة للعروسان</label>
+                        <textarea name="message" placeholder="اكتب مباركتك هنا..."></textarea>
+                    </div>
+                    <button type="submit" class="rsvp-submit-btn">إرسال</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- الصفحة السابعة -->
+    <div class="page page7">
+        <h1 class="page6-title">وبـحـضـوركـم تـكـتـمـل فـرحـتـنـا</h1>
+        <h1 class="page6-title">ودامـت ديـارنـا و دياركـم عـامـرة</h1>
+        <h1 class="page6-title">بـالافـراح والـمـسرات</h1>
+        <div class="prohibition-box-highlight light-pink-box-style">
+            <h3 class="page6-warning">منعاً لـلإحراج يـمـنـع اصـطـحـاب الأطـفـال والـتصـويـر</h3>
+        </div>
+    </div>
+
+    <!-- الصفحة الثامنة -->
+    <div class="page page8 center-final-logo-page">
+        <div class="logo-wrapper final-centered-logo-wrapper">
+            <img src="loge.png" alt="Logo" class="fade-logo match-start-logo" style="opacity: 1; transform: scale(1);">
+        </div>
+    </div>
+
+    <!-- JavaScript للتحميل المسبق والصوت -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const imagesToLoad = [
+                'card2.png', 'page2.png', 'page3.png', 'page4.png', 
+                'page5.png', 'page6.png', 'page7.png', 'page8.png', 
+                'carde text.png', 'loge.png', 'page(2)_logo.png'
+            ];
+
+            let loadedCount = 0;
+            const loaderBar = document.getElementById('loader-bar');
+            const loaderScreen = document.getElementById('loader-screen');
+            const startScreen = document.getElementById('start-screen');
+
+            function updateLoader() {
+                loadedCount++;
+                let percentage = Math.floor((loadedCount / imagesToLoad.length) * 100);
+                loaderBar.style.width = percentage + '%';
+
+                if (loadedCount >= imagesToLoad.length) {
+                    setTimeout(() => {
+                        loaderScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            loaderScreen.style.display = 'none';
+                            startScreen.classList.add('ready');
+                        }, 600);
+                    }, 300);
+                }
+            }
+
+            imagesToLoad.forEach(src => {
+                const img = new Image();
+                img.src = src;
+                img.onload = updateLoader;
+                img.onerror = updateLoader; // للمتابعة حتى لو صورة تأخرت
+            });
+
+            const bgAudio = document.getElementById('bg-audio');
+
+            startScreen.addEventListener('click', function () {
+                startScreen.classList.add('animate-open');
+                bgAudio.play().catch(error => {
+                    console.log("Audio play error:", error);
+                });
+                document.querySelector('.page1').classList.add('active');
+            });
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.3
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => observer.observe(page));
+        });
+    </script>
+
+</body>
+</html>
